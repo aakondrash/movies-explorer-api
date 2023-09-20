@@ -61,6 +61,7 @@ module.exports.setUserInfo = (req, res, next) => {
       return res.status(200).send({ data: user });
     })
     .catch((err) => {
+      if (err.code === 11000) return next(new ConflictError('Передан e-mail адрес уже зарегистрированного пользователя.'));
       if (err.name === 'ValidationError') return next(new BadRequestError('Переданы некорректные данные при обновлении пользователя.'));
       return next(err);
     });
@@ -90,4 +91,12 @@ module.exports.login = (req, res, next) => {
       return next;
     })
     .catch(next);
+};
+
+module.exports.logout = (req, res, next) => {
+  try {
+    res.clearCookie('jwt').send({message: 'Вы вышли из аккаунта'});
+  } catch (err) {
+    next(err);
+  }
 };

@@ -1,17 +1,11 @@
-const router = require('express').Router();
-const { celebrate, Joi } = require('celebrate');
+const usersRouter = require('express').Router();
 const {
   getUserInfo,
   setUserInfo,
 } = require('../controllers/users');
-const { EMAIL_REGEXP_PATTERN } = require('../utils/constants');
+const updateUserInfoValidation = require('../utils/validation/updateUserInfoValidation');
 
-router.get('/users/me', getUserInfo);
-router.patch('/users/me', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().pattern(EMAIL_REGEXP_PATTERN),
-    name: Joi.string(),
-  }),
-}), setUserInfo);
+usersRouter.get('/users/me', getUserInfo);
+usersRouter.patch('/users/me', updateUserInfoValidation, setUserInfo);
 
-module.exports = router;
+module.exports = usersRouter;

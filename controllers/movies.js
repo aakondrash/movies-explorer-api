@@ -36,8 +36,7 @@ module.exports.deleteMovie = (req, res, next) => {
       if (movie.owner._id.toString() !== req.user._id) {
         return next(new ForbiddenError('Фильм вам не принадлежит - вы не можете удалить его.'));
       }
-      Movie.deleteOne(movie).then(() => res.status(200).send({ data: movie }));
-      return next;
+      return Movie.deleteOne(movie).then(() => res.status(200).send({ data: movie }));
     })
     .catch((err) => {
       if (err.name === 'NotFoundError') return next(new NotFoundError('Фильм с указанным _id не найден.'));
@@ -47,7 +46,7 @@ module.exports.deleteMovie = (req, res, next) => {
 };
 
 module.exports.getAllMovies = (req, res, next) => {
-  Movie.find({})
+  Movie.find({ owner: req.user._id })
     .then((movie) => res.status(200).send({ data: movie }))
     .catch((err) => {
       if (err.name === 'ValidationError' || req.params._id.length !== 24) return next(new BadRequestError('Переданы некорректные данные при получении фильма.'));
