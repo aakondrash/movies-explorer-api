@@ -30,7 +30,7 @@ module.exports.createMovie = (req, res, next) => {
 };
 
 module.exports.deleteMovie = (req, res, next) => {
-  Movie.findOne({ movieId: req.params._id })
+  Movie.findOne({ _id: req.params._id })
     .orFail(() => next(new NotFoundError('Фильм с указанным _id не найден.')))
     .then((movie) => {
       if (movie.owner._id.toString() !== req.user._id) {
@@ -40,7 +40,7 @@ module.exports.deleteMovie = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'NotFoundError') return next(new NotFoundError('Фильм с указанным _id не найден.'));
-      if (err.name === 'ValidationError' || req.params._id.length === 0) return next(new BadRequestError('Переданы некорректные данные при удалении фильма.'));
+      if (err.name === 'ValidationError' || req.params._id.length !== 24) return next(new BadRequestError('Переданы некорректные данные при удалении фильма.'));
       return next(err);
     });
 };
