@@ -7,6 +7,7 @@ const allowedCors = [
   'http://api.moviesexplorer.aakond.nomoredomainsrocks.ru',
   'https://moviesexplorer.aakond.nomoredomainsrocks.ru',
   'http://moviesexplorer.aakond.nomoredomainsrocks.ru',
+
 ];
 const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
 
