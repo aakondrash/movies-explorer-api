@@ -3,10 +3,10 @@ const allowedCors = [
   'http://localhost:3000',
   'https://localhost:3001',
   'http://localhost:3001',
-  'https://api.mesto.aakondrash.nomoredomainsicu.ru',
-  'http://api.mesto.aakondrash.nomoredomainsicu.ru',
-  'https://mesto.aakondrash.nomoredomainsicu.ru',
-  'http://mesto.aakondrash.nomoredomainsicu.ru',
+  'https://api.moviesexplorer.aakond.nomoredomainsrocks.ru',
+  'http://api.moviesexplorer.aakond.nomoredomainsrocks.ru',
+  'https://moviesexplorer.aakond.nomoredomainsrocks.ru',
+  'http://moviesexplorer.aakond.nomoredomainsrocks.ru',
 ];
 const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
 
